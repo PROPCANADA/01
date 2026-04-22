@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Information — Prop Bills Shop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#07091c; --night3:#141632;
+  --white:#fff; --g50:#f7f7fc; --g100:#eeeff8; --g200:#e0e1f0;
+  --ink:#0c0d20; --ink2:#363758; --ink3:#72738a;
+  --indigo:#4f46e5; --indigo2:#6366f1; --indigo3:#818cf8;
+  --ip:rgba(79,70,229,.09); --ib:rgba(79,70,229,.22);
+  --amber:#d97706; --emerald:#059669;
+  --r8:8px; --r12:12px; --r16:16px; --r20:20px;
+  --ease:.22s cubic-bezier(.4,0,.2,1);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--white);color:var(--ink);-webkit-font-smoothing:antialiased;}
+
+/* NAV */
+.nav{background:var(--night);padding:0 28px;display:flex;align-items:center;justify-content:space-between;height:60px;position:sticky;top:0;z-index:100;}
+.nav-logo{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:700;color:#fff;text-decoration:none;letter-spacing:.02em;}
+.nav-back{display:flex;align-items:center;gap:7px;color:rgba(255,255,255,.6);text-decoration:none;font-size:.84rem;font-weight:600;transition:color var(--ease);}
+.nav-back:hover{color:#fff;}
+.nav-back svg{flex-shrink:0;}
+.lang-toggle{display:flex;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:50px;padding:3px;}
+.lb{padding:4px 12px;border:none;border-radius:50px;background:transparent;color:rgba(255,255,255,.45);font-size:.74rem;font-weight:600;cursor:pointer;transition:var(--ease);font-family:'Plus Jakarta Sans',sans-serif;}
+.lb.active{background:var(--indigo);color:#fff;}
+
+/* HERO */
+.page-hero{background:linear-gradient(135deg,var(--night) 0%,var(--night3) 100%);padding:64px 28px 52px;text-align:center;}
+.page-kicker{display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(129,140,248,.3);background:rgba(79,70,229,.12);color:var(--indigo3);padding:5px 14px;border-radius:50px;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:18px;}
+.page-h1{font-family:'Fraunces',serif;font-size:clamp(2rem,4vw,3.4rem);font-weight:900;color:#fff;letter-spacing:-.02em;margin-bottom:14px;}
+.page-h1 em{font-style:italic;color:var(--indigo3);}
+.page-desc{font-size:1rem;color:rgba(255,255,255,.48);max-width:560px;margin:0 auto;line-height:1.8;}
+
+/* CONTENT */
+.content{max-width:1100px;margin:0 auto;padding:60px 28px 80px;}
+
+/* Media gallery */
+.gallery-label{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--indigo);margin-bottom:16px;}
+.gallery-h{font-family:'Fraunces',serif;font-size:1.9rem;font-weight:700;color:var(--ink);margin-bottom:8px;}
+.gallery-desc{font-size:.92rem;color:var(--ink3);margin-bottom:28px;line-height:1.7;}
+
+/* === PHOTO UPLOAD AREA === */
+.media-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;
+  margin-bottom:40px;
+}
+.media-card{
+  background:var(--g50);border:2px dashed var(--g200);border-radius:var(--r16);
+  aspect-ratio:4/3;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:10px;cursor:pointer;transition:border-color var(--ease),background var(--ease);
+  padding:20px;text-align:center;position:relative;overflow:hidden;
+}
+.media-card:hover{border-color:var(--indigo);background:var(--ip);}
+.media-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:calc(var(--r16) - 2px);}
+.media-card-icon{font-size:2rem;opacity:.3;}
+.media-card-label{font-size:.8rem;font-weight:600;color:var(--ink3);}
+.media-card-hint{font-size:.7rem;color:var(--ink3);opacity:.6;}
+
+/* Video embed area */
+.video-section{margin-bottom:48px;}
+.video-placeholder{
+  background:var(--night);border-radius:var(--r16);
+  aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:14px;border:1px solid rgba(255,255,255,.08);
+  position:relative;overflow:hidden;
+}
+.video-placeholder::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(79,70,229,.15) 0%,transparent 70%);}
+.video-placeholder svg{color:rgba(255,255,255,.3);position:relative;z-index:1;}
+.video-placeholder-text{font-size:.88rem;color:rgba(255,255,255,.4);position:relative;z-index:1;text-align:center;max-width:320px;line-height:1.6;}
+.video-placeholder-label{font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(129,140,248,.6);position:relative;z-index:1;}
+/* Actual YouTube/video embed once added */
+.video-embed{border-radius:var(--r16);overflow:hidden;aspect-ratio:16/9;}
+.video-embed iframe{width:100%;height:100%;border:none;display:block;}
+
+/* Specs */
+.specs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin-bottom:40px;}
+.spec-card{background:var(--g50);border:1px solid var(--g200);border-radius:var(--r12);padding:18px;}
+.spec-icon{font-size:1.4rem;margin-bottom:8px;}
+.spec-title{font-size:.84rem;font-weight:700;color:var(--ink);margin-bottom:4px;}
+.spec-desc{font-size:.78rem;color:var(--ink3);line-height:1.6;}
+
+/* CTA */
+.cta-box{
+  background:linear-gradient(135deg,var(--night),var(--night3));
+  border-radius:var(--r20);padding:40px;text-align:center;
+  position:relative;overflow:hidden;
+}
+.cta-box::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 80% at 50% 0%,rgba(79,70,229,.2) 0%,transparent 70%);pointer-events:none;}
+.cta-box h2{font-family:'Fraunces',serif;font-size:1.9rem;font-weight:700;color:#fff;letter-spacing:-.01em;margin-bottom:12px;position:relative;z-index:1;}
+.cta-box p{font-size:.92rem;color:rgba(255,255,255,.45);margin-bottom:24px;position:relative;z-index:1;}
+.cta-buttons{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;position:relative;z-index:1;}
+.btn-cta{background:var(--indigo);color:#fff;border:none;padding:13px 28px;border-radius:var(--r8);font-size:.88rem;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;text-decoration:none;transition:var(--ease);display:inline-block;}
+.btn-cta:hover{background:var(--indigo2);transform:translateY(-1px);}
+.btn-cta-ghost{background:rgba(255,255,255,.07);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.15);padding:12px 22px;border-radius:var(--r8);font-size:.86rem;font-weight:500;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;text-decoration:none;transition:var(--ease);display:inline-block;}
+.btn-cta-ghost:hover{background:rgba(255,255,255,.12);color:#fff;}
+
+@media(max-width:640px){.content{padding:36px 14px 60px;}.page-hero{padding:44px 16px 36px;}.nav{padding:0 14px;}}
+
+/* Admin hint banner */
+.admin-hint{background:rgba(217,119,6,.08);border:1.5px dashed rgba(217,119,6,.3);border-radius:var(--r8);padding:13px 16px;font-size:.82rem;color:rgba(217,119,6,.9);line-height:1.65;margin-bottom:28px;}
+.admin-hint strong{color:var(--amber);}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="index.html" class="nav-back">
+    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    <span id="back-lbl">Back to Shop</span>
+  </a>
+  <a href="index.html" class="nav-logo">Prop Bills Shop</a>
+  <div class="lang-toggle">
+    <button class="lb active" id="lang-en" onclick="setLang('en')">EN</button>
+    <button class="lb" id="lang-fr" onclick="setLang('fr')">FR</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="page-kicker" id="hero-kicker">Product Showcase</div>
+  <h1 class="page-h1" id="page-h1">See Our <em>Prop Bills</em><br>Up Close</h1>
+  <p class="page-desc" id="page-desc">High-resolution photos and videos of our custom prop currency — $20, $50 and $100 denominations. Judge the quality for yourself before ordering.</p>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+  <!-- ADMIN HINT -->
+  <div class="admin-hint">
+    <strong>Note for admin:</strong> Replace the placeholder cards below with your actual product photos. Add YouTube video links in the video section. The placeholders are grey dashed boxes — swap them with <code>&lt;img&gt;</code> tags or embed your YouTube videos using the iframe code provided.
+  </div>
+
+  <!-- PHOTOS -->
+  <div style="margin-bottom:44px;">
+    <div class="gallery-label" id="photos-label">Product Photos</div>
+    <div class="gallery-h" id="photos-h">Quality You Can See</div>
+    <div class="gallery-desc" id="photos-desc">Every bundle is printed with precision and attention to detail. These photos show the actual product you receive.</div>
+
+    <div class="media-grid">
+      <!-- Replace each .media-card with an <img> tag to your photo -->
+      <div class="media-card">
+        <div class="media-card-icon">📷</div>
+        <div class="media-card-label" id="ph-placeholder">Add your photo here</div>
+        <div class="media-card-hint">Replace with: &lt;img src="photo1.jpg" ...&gt;</div>
+      </div>
+      <div class="media-card">
+        <div class="media-card-icon">📷</div>
+        <div class="media-card-label">Add your photo here</div>
+        <div class="media-card-hint">Replace with: &lt;img src="photo2.jpg" ...&gt;</div>
+      </div>
+      <div class="media-card">
+        <div class="media-card-icon">📷</div>
+        <div class="media-card-label">Add your photo here</div>
+        <div class="media-card-hint">Replace with: &lt;img src="photo3.jpg" ...&gt;</div>
+      </div>
+      <div class="media-card">
+        <div class="media-card-icon">📷</div>
+        <div class="media-card-label">Add your photo here</div>
+        <div class="media-card-hint">Replace with: &lt;img src="photo4.jpg" ...&gt;</div>
+      </div>
+      <div class="media-card">
+        <div class="media-card-icon">📷</div>
+        <div class="media-card-label">Add your photo here</div>
+        <div class="media-card-hint">Replace with: &lt;img src="photo5.jpg" ...&gt;</div>
+      </div>
+      <div class="media-card">
+        <div class="media-card-icon">📷</div>
+        <div class="media-card-label">Add your photo here</div>
+        <div class="media-card-hint">Replace with: &lt;img src="photo6.jpg" ...&gt;</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIDEO -->
+  <div class="video-section">
+    <div class="gallery-label" id="video-label">Product Video</div>
+    <div class="gallery-h" id="video-h">Watch It In Action</div>
+    <div class="gallery-desc" id="video-desc">See how the bills look and feel on camera — close-up footage showing print quality, texture and detail.</div>
+
+    <!--
+      TO ADD A YOUTUBE VIDEO: Replace the .video-placeholder div below with:
+      <div class="video-embed">
+        <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" allowfullscreen></iframe>
+      </div>
+    -->
+    <div class="video-placeholder">
+      <svg width="56" height="56" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+      <div class="video-placeholder-label" id="vid-placeholder-lbl">Add your video here</div>
+      <div class="video-placeholder-text" id="vid-placeholder-desc">Replace this block with your YouTube embed code.<br>See the comment in the HTML source for instructions.</div>
+    </div>
+  </div>
+
+  <!-- PRODUCT SPECS -->
+  <div style="margin-bottom:44px;">
+    <div class="gallery-label" id="specs-label">Product Details</div>
+    <div class="gallery-h" id="specs-h">What You Get</div>
+    <div class="specs-grid">
+      <div class="spec-card"><div class="spec-icon">💵</div><div class="spec-title" id="sp1h">3 Denominations</div><div class="spec-desc" id="sp1d">Available in $20, $50 and $100 PROP — mix any way you want.</div></div>
+      <div class="spec-card"><div class="spec-icon">📦</div><div class="spec-title" id="sp2h">Bundled in 50s</div><div class="spec-desc" id="sp2d">Each bundle contains exactly 50 bills, rubber-banded and ready to use.</div></div>
+      <div class="spec-card"><div class="spec-icon">🖨️</div><div class="spec-title" id="sp3h">Double-sided print</div><div class="spec-desc" id="sp3d">Full-colour printing on both sides for maximum realism on camera.</div></div>
+      <div class="spec-card"><div class="spec-icon">📐</div><div class="spec-title" id="sp4h">Standard bill size</div><div class="spec-desc" id="sp4d">Same dimensions as real CAD/USD bills — compatible with money guns, money counters and prop boxes.</div></div>
+      <div class="spec-card"><div class="spec-icon">✅</div><div class="spec-title" id="sp5h">Legal prop currency</div><div class="spec-desc" id="sp5d">Clearly marked "PROP" — compliant with prop currency regulations for film and entertainment use.</div></div>
+      <div class="spec-card"><div class="spec-icon">🚀</div><div class="spec-title" id="sp6h">In stock & ready</div><div class="spec-desc" id="sp6d">All pack sizes ship same day payment is confirmed. No wait times, no pre-orders.</div></div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-box">
+    <h2 id="cta-h">Ready to Order?</h2>
+    <p id="cta-desc">Choose your pack size and build the exact denomination mix you need.</p>
+    <div class="cta-buttons">
+      <a href="index.html#shop" class="btn-cta" id="cta-shop">Shop Now</a>
+      <a href="https://t.me/propbillsofficial1" target="_blank" class="btn-cta-ghost" id="cta-tg">Contact on Telegram</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+let lang='en';
+const T={
+  en:{
+    backLbl:"Back to Shop",
+    heroBadge:"Product Showcase",
+    h1:'See Our <em>Prop Bills</em><br>Up Close',
+    desc:"High-resolution photos and videos of our custom prop currency — $20, $50 and $100 denominations. Judge the quality for yourself before ordering.",
+    photosLabel:"Product Photos", photosH:"Quality You Can See",
+    photosDesc:"Every bundle is printed with precision. These photos show the actual product you receive.",
+    videoLabel:"Product Video", videoH:"Watch It In Action",
+    videoDesc:"See how the bills look and feel on camera — close-up footage showing print quality, texture and detail.",
+    specsLabel:"Product Details", specsH:"What You Get",
+    sp1h:"3 Denominations", sp1d:"Available in $20, $50 and $100 PROP — mix any way you want.",
+    sp2h:"Bundled in 50s", sp2d:"Each bundle contains 50 bills, rubber-banded and ready to use.",
+    sp3h:"Double-sided print", sp3d:"Full-colour printing on both sides for maximum realism on camera.",
+    sp4h:"Standard bill size", sp4d:"Same dimensions as real CAD/USD bills — compatible with money guns, counters and prop boxes.",
+    sp5h:"Legal prop currency", sp5d:"Clearly marked PROP — compliant with prop currency regulations.",
+    sp6h:"In stock & ready", sp6d:"All packs ship same day payment is confirmed.",
+    ctaH:"Ready to Order?", ctaDesc:"Choose your pack size and build the exact denomination mix you need.",
+    ctaShop:"Shop Now", ctaTg:"Contact on Telegram",
+    vidPlaceholderLbl:"Add your video here",
+    vidPlaceholderDesc:"Replace this block with your YouTube embed code."
+  },
+  fr:{
+    backLbl:"Retour à la boutique",
+    heroBadge:"Vitrine Produit",
+    h1:'Nos <em>Prop Bills</em><br>en Détail',
+    desc:"Photos haute résolution et vidéos de nos billets de prop — coupures $20, $50 et $100. Jugez la qualité par vous-même avant de commander.",
+    photosLabel:"Photos du produit", photosH:"Une qualité visible",
+    photosDesc:"Chaque liasse est imprimée avec précision. Ces photos montrent le produit réel que vous recevrez.",
+    videoLabel:"Vidéo du produit", videoH:"Voyez-le en action",
+    videoDesc:"Comment les billets se présentent à la caméra — gros plans sur la qualité d'impression, la texture et les détails.",
+    specsLabel:"Détails du produit", specsH:"Ce que vous recevez",
+    sp1h:"3 coupures", sp1d:"Disponible en $20, $50 et $100 PROP — mélangez comme vous voulez.",
+    sp2h:"Liasses de 50", sp2d:"Chaque liasse contient 50 billets, attachées et prêtes à l'emploi.",
+    sp3h:"Impression recto-verso", sp3d:"Impression couleur sur les deux faces pour un réalisme maximal à l'écran.",
+    sp4h:"Format standard", sp4d:"Mêmes dimensions que les vrais billets CAD/USD — compatibles pistolets à billets, compteuses et boîtes prop.",
+    sp5h:"Monnaie de prop légale", sp5d:"Clairement marqué PROP — conforme aux réglementations sur la monnaie de prop.",
+    sp6h:"En stock et prêt", sp6d:"Tous les packs sont expédiés le jour même de la confirmation du paiement.",
+    ctaH:"Prêt à commander ?", ctaDesc:"Choisissez la taille de votre pack et construisez le mix exact dont vous avez besoin.",
+    ctaShop:"Commander", ctaTg:"Contacter sur Telegram",
+    vidPlaceholderLbl:"Ajoutez votre vidéo ici",
+    vidPlaceholderDesc:"Remplacez ce bloc par votre code d'intégration YouTube."
+  }
+};
+function setLang(l){
+  lang=l;
+  document.getElementById('lang-en').classList.toggle('active',l==='en');
+  document.getElementById('lang-fr').classList.toggle('active',l==='fr');
+  const v=T[l];
+  document.getElementById('back-lbl').textContent=v.backLbl;
+  document.getElementById('hero-kicker').textContent=v.heroBadge;
+  document.getElementById('page-h1').innerHTML=v.h1;
+  document.getElementById('page-desc').textContent=v.desc;
+  document.getElementById('photos-label').textContent=v.photosLabel;
+  document.getElementById('photos-h').textContent=v.photosH;
+  document.getElementById('photos-desc').textContent=v.photosDesc;
+  document.getElementById('video-label').textContent=v.videoLabel;
+  document.getElementById('video-h').textContent=v.videoH;
+  document.getElementById('video-desc').textContent=v.videoDesc;
+  document.getElementById('specs-label').textContent=v.specsLabel;
+  document.getElementById('specs-h').textContent=v.specsH;
+  ['sp1h','sp1d','sp2h','sp2d','sp3h','sp3d','sp4h','sp4d','sp5h','sp5d','sp6h','sp6d'].forEach(k=>{
+    const el=document.getElementById(k); if(el) el.textContent=v[k];
+  });
+  document.getElementById('cta-h').textContent=v.ctaH;
+  document.getElementById('cta-desc').textContent=v.ctaDesc;
+  document.getElementById('cta-shop').textContent=v.ctaShop;
+  document.getElementById('cta-tg').textContent=v.ctaTg;
+  document.getElementById('vid-placeholder-lbl').textContent=v.vidPlaceholderLbl;
+  document.getElementById('vid-placeholder-desc').textContent=v.vidPlaceholderDesc;
+}
+setLang('en');
+</script>
+</body>
+</html>

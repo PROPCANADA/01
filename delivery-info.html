@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delivery Information — Prop Bills Shop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#07091c; --night3:#141632;
+  --white:#fff; --g50:#f7f7fc; --g100:#eeeff8; --g200:#e0e1f0;
+  --ink:#0c0d20; --ink2:#363758; --ink3:#72738a; --ink4:#ababc4;
+  --indigo:#4f46e5; --indigo2:#6366f1; --indigo3:#818cf8;
+  --ip:rgba(79,70,229,.09); --ib:rgba(79,70,229,.22);
+  --amber:#d97706; --ap:rgba(217,119,6,.09); --ab:rgba(217,119,6,.22);
+  --emerald:#059669; --ep:rgba(5,150,105,.09); --eb:rgba(5,150,105,.22);
+  --orange:#ea580c; --op:rgba(234,88,12,.09); --ob:rgba(234,88,12,.22);
+  --rose:#dc2626;
+  --r8:8px; --r12:12px; --r16:16px; --r20:20px;
+  --ease:.22s cubic-bezier(.4,0,.2,1);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--white);color:var(--ink);-webkit-font-smoothing:antialiased;}
+
+.nav{background:var(--night);padding:0 28px;display:flex;align-items:center;justify-content:space-between;height:60px;position:sticky;top:0;z-index:100;}
+.nav-logo{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:700;color:#fff;text-decoration:none;}
+.nav-back{display:flex;align-items:center;gap:7px;color:rgba(255,255,255,.6);text-decoration:none;font-size:.84rem;font-weight:600;transition:color var(--ease);}
+.nav-back:hover{color:#fff;}
+.lang-toggle{display:flex;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:50px;padding:3px;}
+.lb{padding:4px 12px;border:none;border-radius:50px;background:transparent;color:rgba(255,255,255,.45);font-size:.74rem;font-weight:600;cursor:pointer;transition:var(--ease);font-family:'Plus Jakarta Sans',sans-serif;}
+.lb.active{background:var(--indigo);color:#fff;}
+
+.page-hero{background:linear-gradient(135deg,var(--night) 0%,var(--night3) 100%);padding:64px 28px 52px;text-align:center;}
+.page-kicker{display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(129,140,248,.3);background:rgba(79,70,229,.12);color:var(--indigo3);padding:5px 14px;border-radius:50px;font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:18px;}
+.page-h1{font-family:'Fraunces',serif;font-size:clamp(2rem,4vw,3.4rem);font-weight:900;color:#fff;letter-spacing:-.02em;margin-bottom:14px;}
+.page-h1 em{font-style:italic;color:var(--indigo3);}
+.page-desc{font-size:1rem;color:rgba(255,255,255,.48);max-width:560px;margin:0 auto;line-height:1.8;}
+
+.content{max-width:1000px;margin:0 auto;padding:60px 28px 80px;}
+
+/* Guarantee bar */
+.guarantee-bar{
+  background:linear-gradient(135deg,rgba(5,150,105,.08),rgba(5,150,105,.04));
+  border:1.5px solid var(--eb);border-radius:var(--r16);
+  padding:26px 30px;margin-bottom:40px;
+  display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+}
+.guarantee-badge{
+  display:flex;align-items:center;gap:9px;flex:1;min-width:180px;
+}
+.guarantee-ico{width:38px;height:38px;border-radius:var(--r8);background:rgba(5,150,105,.12);border:1px solid var(--eb);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.guarantee-ico svg{color:var(--emerald);}
+.guarantee-title{font-size:.86rem;font-weight:700;color:var(--ink);margin-bottom:2px;}
+.guarantee-sub{font-size:.74rem;color:var(--ink3);line-height:1.4;}
+
+/* Section */
+.sec{margin-bottom:44px;}
+.sec-eye{font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--indigo);margin-bottom:6px;}
+.sec-title{font-family:'Fraunces',serif;font-size:1.9rem;font-weight:700;color:var(--ink);letter-spacing:-.01em;margin-bottom:16px;}
+.sec-rule{width:36px;height:3px;background:linear-gradient(90deg,var(--indigo),var(--indigo3));border-radius:2px;margin-bottom:16px;}
+
+/* Steps */
+.steps-list{display:flex;flex-direction:column;gap:0;}
+.step-row{display:flex;gap:16px;padding:18px 0;border-bottom:1px solid var(--g100);}
+.step-row:last-child{border-bottom:none;}
+.step-num-wrap{display:flex;flex-direction:column;align-items:center;flex-shrink:0;}
+.step-n{width:32px;height:32px;border-radius:50%;background:var(--indigo);color:#fff;font-size:.8rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.step-line{width:2px;flex:1;background:var(--g200);margin-top:6px;}
+.step-body{flex:1;padding-bottom:8px;}
+.step-title{font-size:.92rem;font-weight:700;color:var(--ink);margin-bottom:4px;}
+.step-desc{font-size:.86rem;color:var(--ink3);line-height:1.7;}
+.step-tag{display:inline-flex;align-items:center;gap:4px;background:var(--emerald);color:#fff;font-size:.72rem;font-weight:700;padding:2px 9px;border-radius:50px;margin-top:6px;}
+.step-tag-amber{background:var(--amber);}
+
+/* Info cards */
+.info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-bottom:12px;}
+.info-card{background:var(--g50);border:1px solid var(--g200);border-radius:var(--r12);padding:18px 20px;}
+.info-card.green{background:var(--ep);border-color:var(--eb);}
+.info-card.amber{background:var(--ap);border-color:var(--ab);}
+.info-card.orange{background:var(--op);border-color:var(--ob);}
+.info-card-title{font-size:.86rem;font-weight:700;color:var(--ink);margin-bottom:5px;}
+.info-card.green .info-card-title{color:var(--emerald);}
+.info-card.amber .info-card-title{color:var(--amber);}
+.info-card.orange .info-card-title{color:var(--orange);}
+.info-card-body{font-size:.82rem;color:var(--ink3);line-height:1.65;}
+
+/* FAQ */
+.faq-item{border-bottom:1px solid var(--g100);}
+.faq-q{width:100%;background:none;border:none;padding:16px 0;display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;text-align:left;}
+.faq-q-text{font-size:.9rem;font-weight:600;color:var(--ink);}
+.faq-arrow{font-size:.78rem;color:var(--ink4);transition:transform var(--ease);flex-shrink:0;}
+.faq-a{display:none;padding:0 0 16px;font-size:.86rem;color:var(--ink3);line-height:1.75;}
+.faq-item.open .faq-arrow{transform:rotate(180deg);}
+.faq-item.open .faq-a{display:block;}
+
+/* CTA */
+.cta-box{background:linear-gradient(135deg,var(--night),var(--night3));border-radius:var(--r20);padding:40px;text-align:center;position:relative;overflow:hidden;}
+.cta-box::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 80% at 50% 0%,rgba(79,70,229,.2) 0%,transparent 70%);pointer-events:none;}
+.cta-box h2{font-family:'Fraunces',serif;font-size:1.8rem;font-weight:700;color:#fff;letter-spacing:-.01em;margin-bottom:10px;position:relative;z-index:1;}
+.cta-box p{font-size:.9rem;color:rgba(255,255,255,.45);margin-bottom:22px;position:relative;z-index:1;}
+.cta-buttons{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;position:relative;z-index:1;}
+.btn-cta{background:var(--indigo);color:#fff;border:none;padding:13px 28px;border-radius:var(--r8);font-size:.88rem;font-weight:700;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;text-decoration:none;transition:var(--ease);display:inline-block;}
+.btn-cta:hover{background:var(--indigo2);transform:translateY(-1px);}
+.btn-ghost{background:rgba(255,255,255,.07);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.15);padding:12px 22px;border-radius:var(--r8);font-size:.86rem;font-weight:500;text-decoration:none;transition:var(--ease);display:inline-block;}
+.btn-ghost:hover{background:rgba(255,255,255,.12);color:#fff;}
+
+@media(max-width:640px){.content{padding:36px 14px 60px;}.guarantee-bar{padding:20px;}.nav{padding:0 14px;}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-back">
+    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    <span id="back-lbl">Back to Shop</span>
+  </a>
+  <a href="index.html" class="nav-logo">Prop Bills Shop</a>
+  <div class="lang-toggle">
+    <button class="lb active" id="lang-en" onclick="setLang('en')">EN</button>
+    <button class="lb" id="lang-fr" onclick="setLang('fr')">FR</button>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-kicker" id="hero-kicker">Delivery Info</div>
+  <h1 class="page-h1" id="page-h1">Shipping &amp; <em>Delivery</em><br>Everything You Need to Know</h1>
+  <p class="page-desc" id="page-desc">We ship via Purolator for Canadian orders (FedEx internationally). Every package is tracked, plain, and guaranteed to arrive.</p>
+</div>
+
+<div class="content">
+
+  <!-- GUARANTEES -->
+  <div class="guarantee-bar">
+    <div class="guarantee-badge">
+      <div class="guarantee-ico"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+      <div><div class="guarantee-title" id="gb1h">100% Delivery Guarantee</div><div class="guarantee-sub" id="gb1s">If your package doesn't arrive, we reship at no cost.</div></div>
+    </div>
+    <div class="guarantee-badge">
+      <div class="guarantee-ico"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+      <div><div class="guarantee-title" id="gb2h">No Signature Required</div><div class="guarantee-sub" id="gb2s">Package left at your door. No need to be home.</div></div>
+    </div>
+    <div class="guarantee-badge">
+      <div class="guarantee-ico"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <div><div class="guarantee-title" id="gb3h">Discreet Packaging</div><div class="guarantee-sub" id="gb3s">Plain box, zero branding — nothing visible outside.</div></div>
+    </div>
+    <div class="guarantee-badge">
+      <div class="guarantee-ico"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+      <div><div class="guarantee-title" id="gb4h">Same-Day Dispatch</div><div class="guarantee-sub" id="gb4s">We ship on the same day your payment clears.</div></div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="sec">
+    <div class="sec-eye" id="flow-eye">From Payment to Delivery</div>
+    <div class="sec-title" id="flow-h">How the Process Works</div>
+    <div class="sec-rule"></div>
+    <div class="steps-list">
+      <div class="step-row">
+        <div class="step-num-wrap"><div class="step-n">1</div><div class="step-line"></div></div>
+        <div class="step-body"><div class="step-title" id="st1h">You place your order</div><div class="step-desc" id="st1d">Fill out the form on our website with your address and contact details. Choose your payment method — Bitcoin, Zcash or Interac.</div></div>
+      </div>
+      <div class="step-row">
+        <div class="step-num-wrap"><div class="step-n">2</div><div class="step-line"></div></div>
+        <div class="step-body"><div class="step-title" id="st2h">Send your payment proof</div><div class="step-desc" id="st2d">After paying, send a screenshot of your transaction to our Telegram: <a href="https://t.me/propbillsofficial1" target="_blank" style="color:var(--indigo);font-weight:600;">@propbillsofficial1</a>. This speeds up confirmation significantly.</div></div>
+      </div>
+      <div class="step-row">
+        <div class="step-num-wrap"><div class="step-n">3</div><div class="step-line"></div></div>
+        <div class="step-body"><div class="step-title" id="st3h">We confirm &amp; pack your order</div><div class="step-desc" id="st3d">Once your payment is confirmed, we prepare your custom pack — each bundle counted, banded and packed. Usually completed within 1–2 hours.</div><div class="step-tag step-tag-amber" id="st3t">1–2 hours</div></div>
+      </div>
+      <div class="step-row">
+        <div class="step-num-wrap"><div class="step-n">4</div><div class="step-line"></div></div>
+        <div class="step-body"><div class="step-title" id="st4h">Shipped same day with Purolator</div><div class="step-desc" id="st4d">Your package is dropped off at Purolator the same day. You'll receive a tracking number by SMS (the phone number you provided at checkout).</div><div class="step-tag" id="st4t">Same-day</div></div>
+      </div>
+      <div class="step-row">
+        <div class="step-num-wrap"><div class="step-n">5</div></div>
+        <div class="step-body"><div class="step-title" id="st5h">Delivered to your door — no signature needed</div><div class="step-desc" id="st5d">Purolator delivers your package directly to your door. No signature required — the carrier leaves the parcel safely without you needing to be home.</div><div class="step-tag" id="st5t">1–3 business days</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DELIVERY INFO CARDS -->
+  <div class="sec">
+    <div class="sec-eye" id="times-eye">Delivery Times &amp; Zones</div>
+    <div class="sec-title" id="times-h">Where We Ship</div>
+    <div class="sec-rule"></div>
+    <div class="info-grid">
+      <div class="info-card green">
+        <div class="info-card-title" id="z1h">Canada — Purolator</div>
+        <div class="info-card-body" id="z1b">1–3 business days. All provinces and territories. Fully tracked. No signature required. Delivery guaranteed.</div>
+      </div>
+      <div class="info-card amber">
+        <div class="info-card-title" id="z2h">USA &amp; International — FedEx</div>
+        <div class="info-card-body" id="z2b">Available in most countries. Delivery times vary by region (3–7 business days typically). Contact us on Telegram first to confirm rates for your location.</div>
+      </div>
+      <div class="info-card orange">
+        <div class="info-card-title" id="z3h">Remote Areas</div>
+        <div class="info-card-body" id="z3b">Delivery to remote or rural areas may take 1–2 extra days. Additional fees may apply for some international destinations.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="sec">
+    <div class="sec-eye" id="faq-eye">Common Questions</div>
+    <div class="sec-title" id="faq-h">Delivery FAQ</div>
+    <div class="sec-rule"></div>
+    <div id="faq-list"></div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-box">
+    <h2 id="cta-h">Ready to Order?</h2>
+    <p id="cta-desc">Choose your pack size, build your custom mix, and we'll have it at your door in days.</p>
+    <div class="cta-buttons">
+      <a href="index.html#shop" class="btn-cta" id="cta-shop">Shop Now</a>
+      <a href="https://t.me/propbillsofficial1" target="_blank" class="btn-ghost" id="cta-tg">Message Us on Telegram</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+let lang='en';
+const T={
+  en:{
+    backLbl:"Back to Shop",
+    heroBadge:"Delivery Info",
+    h1:'Shipping &amp; <em>Delivery</em><br>Everything You Need to Know',
+    desc:"We ship via Purolator for Canadian orders (FedEx internationally). Every package is tracked, plain, and guaranteed to arrive.",
+    gb1h:"100% Delivery Guarantee", gb1s:"If your package doesn't arrive, we reship at no cost.",
+    gb2h:"No Signature Required",   gb2s:"Package left at your door. No need to be home.",
+    gb3h:"Discreet Packaging",      gb3s:"Plain box, zero branding — nothing visible outside.",
+    gb4h:"Same-Day Dispatch",       gb4s:"We ship on the same day your payment clears.",
+    flowEye:"From Payment to Delivery", flowH:"How the Process Works",
+    st1h:"You place your order", st1d:"Fill out the form with your address and payment choice.",
+    st2h:"Send your payment proof", st2d:"Send a screenshot of your transaction to Telegram @propbillsofficial1.",
+    st3h:"We confirm & pack your order", st3d:"Payment confirmed → we prepare your pack within 1–2 hours.", st3t:"1–2 hours",
+    st4h:"Shipped same day with Purolator", st4d:"Your package ships same day. Tracking number sent by SMS.", st4t:"Same-day",
+    st5h:"Delivered to your door — no signature", st5d:"Left at your door safely — no need to be home.", st5t:"1–3 business days",
+    timesEye:"Delivery Times & Zones", timesH:"Where We Ship",
+    z1h:"Canada — Purolator", z1b:"1–3 business days. All provinces. Fully tracked. No signature required.",
+    z2h:"USA & International — FedEx", z2b:"Most countries covered. 3–7 business days. Contact us on Telegram to confirm rates.",
+    z3h:"Remote Areas", z3b:"Remote/rural may take 1–2 extra days. International fees may apply.",
+    faqEye:"Common Questions", faqH:"Delivery FAQ",
+    faqs:[
+      {q:"Do I need to be home to receive the package?", a:"No. Purolator will leave the parcel at your door without requiring a signature. If your building requires access, you may want to let your concierge know."},
+      {q:"How do I track my order?", a:"You'll receive a Purolator tracking number by SMS to the phone number you provided. You can track it directly on purolator.com."},
+      {q:"What if my package doesn't arrive?", a:"We guarantee delivery. If your package is lost or doesn't arrive within the expected window, contact us on Telegram and we will reship your order at no extra cost — no questions asked."},
+      {q:"Is the packaging discreet?", a:"Absolutely. Your order is shipped in a plain, unmarked box with no shop name, no branding and nothing on the outside that indicates what's inside."},
+      {q:"How long does delivery take?", a:"Within Canada: 1–3 business days with Purolator. International orders via FedEx typically take 3–7 business days depending on destination."},
+      {q:"Can you ship internationally?", a:"Yes. International orders are shipped via FedEx. Rates vary by country — some destinations have no additional fees, others may have small surcharges. Contact us on Telegram before ordering so we can confirm availability and pricing for your region."}
+    ],
+    ctaH:"Ready to Order?", ctaDesc:"Choose your pack, build your mix, and we'll have it at your door in days.",
+    ctaShop:"Shop Now", ctaTg:"Message Us on Telegram"
+  },
+  fr:{
+    backLbl:"Retour à la boutique",
+    heroBadge:"Infos Livraison",
+    h1:'Expédition &amp; <em>Livraison</em><br>Tout ce que vous devez savoir',
+    desc:"Livraison via Purolator pour les commandes canadiennes (FedEx à l'international). Chaque colis est suivi, discret et garanti.",
+    gb1h:"Garantie de livraison 100 %", gb1s:"Si votre colis n'arrive pas, nous le réexpédions sans frais.",
+    gb2h:"Sans signature requise",     gb2s:"Colis laissé à la porte. Pas besoin d'être présent.",
+    gb3h:"Emballage discret",          gb3s:"Boîte neutre, sans marque ni logo visible.",
+    gb4h:"Expédition le jour même",    gb4s:"Expédié le jour même de la confirmation de paiement.",
+    flowEye:"Du paiement à la livraison", flowH:"Comment ça fonctionne",
+    st1h:"Vous passez votre commande", st1d:"Remplissez le formulaire avec votre adresse et votre mode de paiement.",
+    st2h:"Envoyez votre preuve de paiement", st2d:"Envoyez une capture d'écran de votre transaction sur Telegram @propbillsofficial1.",
+    st3h:"Nous confirmons et préparons", st3d:"Paiement confirmé → préparation de votre pack en 1–2 heures.", st3t:"1–2 heures",
+    st4h:"Expédié le jour même via Purolator", st4d:"Votre colis part le jour même. Numéro de suivi envoyé par SMS.", st4t:"Le jour même",
+    st5h:"Livré à votre porte — sans signature", st5d:"Laissé à votre porte en toute sécurité — pas besoin d'être présent.", st5t:"1–3 jours ouvrables",
+    timesEye:"Délais et zones", timesH:"Où nous livrons",
+    z1h:"Canada — Purolator", z1b:"1–3 jours ouvrables. Toutes les provinces. Suivi complet. Sans signature.",
+    z2h:"USA et international — FedEx", z2b:"La plupart des pays. 3–7 jours. Contactez-nous sur Telegram pour confirmer les tarifs.",
+    z3h:"Zones éloignées", z3b:"Les zones rurales/éloignées peuvent prendre 1–2 jours de plus. Des frais peuvent s'appliquer.",
+    faqEye:"Questions fréquentes", faqH:"FAQ Livraison",
+    faqs:[
+      {q:"Dois-je être présent pour recevoir le colis ?", a:"Non. Purolator laissera le colis à votre porte sans exiger de signature. Si votre immeuble nécessite un accès, prévenez votre concierge."},
+      {q:"Comment suivre ma commande ?", a:"Vous recevrez un numéro de suivi Purolator par SMS au numéro fourni lors de la commande. Vous pouvez suivre en temps réel sur purolator.com."},
+      {q:"Que se passe-t-il si mon colis n'arrive pas ?", a:"Nous garantissons la livraison. Si votre colis est perdu ou n'arrive pas dans les délais, contactez-nous sur Telegram et nous réexpédierons votre commande sans frais — sans questions."},
+      {q:"L'emballage est-il vraiment discret ?", a:"Absolument. Votre commande est expédiée dans une boîte neutre, sans nom de boutique, sans logo ni indication du contenu à l'extérieur."},
+      {q:"Combien de temps prend la livraison ?", a:"Au Canada : 1–3 jours ouvrables via Purolator. Les commandes internationales via FedEx prennent généralement 3–7 jours selon la destination."},
+      {q:"Livrez-vous à l'international ?", a:"Oui. Les commandes internationales sont expédiées via FedEx. Les tarifs varient selon le pays — certaines destinations sont sans frais supplémentaires. Contactez-nous sur Telegram avant de commander pour confirmer la disponibilité et les tarifs pour votre région."}
+    ],
+    ctaH:"Prêt à commander ?", ctaDesc:"Choisissez votre pack, construisez votre mix — livré en quelques jours.",
+    ctaShop:"Commander", ctaTg:"Nous contacter sur Telegram"
+  }
+};
+function setLang(l){
+  lang=l;
+  document.getElementById('lang-en').classList.toggle('active',l==='en');
+  document.getElementById('lang-fr').classList.toggle('active',l==='fr');
+  const v=T[l];
+  document.getElementById('back-lbl').textContent=v.backLbl;
+  document.getElementById('hero-kicker').textContent=v.heroBadge;
+  document.getElementById('page-h1').innerHTML=v.h1;
+  document.getElementById('page-desc').textContent=v.desc;
+  ['gb1h','gb1s','gb2h','gb2s','gb3h','gb3s','gb4h','gb4s'].forEach(k=>{const e=document.getElementById(k);if(e)e.textContent=v[k];});
+  document.getElementById('flow-eye').textContent=v.flowEye;
+  document.getElementById('flow-h').textContent=v.flowH;
+  ['st1h','st1d','st2h','st2d','st3h','st3d','st3t','st4h','st4d','st4t','st5h','st5d','st5t'].forEach(k=>{const e=document.getElementById(k);if(e)e.textContent=v[k];});
+  document.getElementById('times-eye').textContent=v.timesEye;
+  document.getElementById('times-h').textContent=v.timesH;
+  ['z1h','z1b','z2h','z2b','z3h','z3b'].forEach(k=>{const e=document.getElementById(k);if(e)e.textContent=v[k];});
+  document.getElementById('faq-eye').textContent=v.faqEye;
+  document.getElementById('faq-h').textContent=v.faqH;
+  // Build FAQ
+  document.getElementById('faq-list').innerHTML=v.faqs.map((f,i)=>`
+    <div class="faq-item" id="faq${i}">
+      <button class="faq-q" onclick="toggleFaq(${i})">
+        <span class="faq-q-text">${f.q}</span>
+        <span class="faq-arrow">▾</span>
+      </button>
+      <div class="faq-a">${f.a}</div>
+    </div>`).join('');
+  document.getElementById('cta-h').textContent=v.ctaH;
+  document.getElementById('cta-desc').textContent=v.ctaDesc;
+  document.getElementById('cta-shop').textContent=v.ctaShop;
+  document.getElementById('cta-tg').textContent=v.ctaTg;
+}
+function toggleFaq(i){
+  const item=document.getElementById('faq'+i);
+  item.classList.toggle('open');
+}
+setLang('en');
+</script>
+</body>
+</html>
